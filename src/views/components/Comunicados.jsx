@@ -27,15 +27,24 @@ export class Comunicados extends Component {
 			);
 		}
 
-		getAllNotices(){
+		getAllNotices(type){
 			fetch('http://localhost:84/comunicados')
 			.then(
 				results => 
 					results.json()
 			).then(
 				data => {
-					this.setState({notices: data})
-					console.log(this.state.notices);
+					if(type) {
+						const notices = [];
+						data.forEach(notice => {
+							if(notice.type === type){
+								notices.push(notice);
+							}
+						});
+						this.setState({notices});
+					} else {
+						this.setState({notices: data})
+					}
 				}
 			);
 		}
@@ -48,7 +57,7 @@ export class Comunicados extends Component {
 										{this.state.categories.map(
 											category => {
 												return(
-													<button type="button" className="btn btn-outline-dark">{category.name}</button>
+													<button type="button" className="btn btn-outline-dark" onClick={() => this.getAllNotices(category.type)}>{category.name}</button>
 												);
 											}
 										)}
@@ -62,7 +71,10 @@ export class Comunicados extends Component {
 														<div className="card notice shadow">
 															
 															<div className="card-body pb-1 pt-3">
-																<h5 className="card-title"> {notice.title} </h5>
+																<div className="row">
+																	<h5 className="card-title col-6 pull-left"> {notice.title} </h5>
+																	<h5 className="card-title col-6 pull-right"> {notice.id} </h5>
+																</div>
 																<div className="row">
 																	<p className="card-text pull-left col-6"> {this.state.categories.map(
 																		category => {
