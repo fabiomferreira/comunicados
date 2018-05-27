@@ -1,4 +1,19 @@
 .App {
-    margin: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  margin: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.category-title {
+  color: darkgrey;
+  font-weight: 340;
+  font-size: 1rem;
+}
+
+.categories {
+  width: 100%; 
+  overflow-x: scroll(or auto);
+}
+
+.btn {
+  margin: 1rem;
+}
+
