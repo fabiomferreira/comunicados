@@ -59,8 +59,9 @@ export class Comunicados extends Component {
 											return(
 												<div className="row">
 													<div className="col-sm-12">
-														<div className="card">
-															<div className="card-body">
+														<div className="card notice shadow">
+															
+															<div className="card-body pb-1 pt-3">
 																<h5 className="card-title"> {notice.title} </h5>
 																<div className="row">
 																	<p className="card-text pull-left col-6"> {this.state.categories.map(

@@ -17,3 +17,8 @@
   margin: 1rem;
 }
 
+.notice {
+  margin: 1rem;
+  border-radius: 0.75rem !important; 
+}
+
