@@ -34,10 +34,11 @@ export class Comunicados extends Component {
 					results.json()
 			).then(
 				data => {
-					if (type) {
+					if (type != undefined) {
 						const notices = [];
 						data.forEach(notice => {
 							if (notice.type === type) {
+								console.log(type);
 								notices.push(notice);
 							}
 						});
@@ -48,10 +49,28 @@ export class Comunicados extends Component {
 				}
 			);
 	}
+	getNoticeColor(type){
+		let className = 'stripe ';
+		switch(type){
+			case 0:
+				className = className + 'informativos';
+				break;
+			case 1:
+				className = className + 'forca';
+				break;
+			case 2:
+				className = className + 'vivo';
+				break;
+			 case 3:
+				className = className + 'vendas';
+				break;
+		}
+		return className;
+	}
 	render() {
 		return (
 			<div className="container-fluid">
-				<h5 className=" text-secondary"> Categorias </h5>
+				<h5 className="text-secondary"> Categorias </h5>
 				<div className="row">
 					<div className="col-sm-12 categories">
 						{this.state.categories.map(
@@ -69,7 +88,8 @@ export class Comunicados extends Component {
 							<div className="row">
 								<div className="col-sm-12">
 									<div className="card notice shadow" onClick={() => console.log(notice.title)}>
-
+										
+										<div className={this.getNoticeColor(notice.type)}></div>
 										<div className="card-body pb-1 pt-3">
 											<div className="row">
 												<h5 className="card-title col-6 pull-left"> {notice.title} </h5>
