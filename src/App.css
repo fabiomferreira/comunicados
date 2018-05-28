@@ -10,6 +10,12 @@
 
 .card-title {
   color: #4f4f4f;
+  cursor:pointer;  
+}
+
+a {
+  color: inherit !important;
+  text-decoration:none; 
 }
 
 .categories {
@@ -26,6 +32,15 @@
   border-radius: 0.75rem !important; 
   border: 0px;
 }
+
+.read-notice {
+  background-color: #ebebeb !important;
+}
+
+.file {
+  margin: 0 auto;
+}
+
 .stripe {
   height: 100%;
   width: 0.8rem;
