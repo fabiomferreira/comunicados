@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import moment from 'moment';
 //import '../../assets/open-iconic-master/font/css/open-iconic-bootstrap.css';
-
+import { Link } from 'react-router-dom';
 
 export class Comunicados extends Component {
 	constructor() {
@@ -89,18 +89,6 @@ export class Comunicados extends Component {
 
 	}
 
-	readNotice(notice){
-		notice.seen = true;
-		fetch('http://localhost:84/comunicados/'+ notice.id, {
-			method: 'PUT',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(notice)
-		})
-	}
-
 	getSeen(notice){
 		let className = 'card notice shadow';
 		if(notice.seen){
@@ -134,9 +122,11 @@ export class Comunicados extends Component {
 										<div className={this.getNoticeColor(notice.type)}></div>
 										<div className="card-body pb-1 pt-3">
 											<div className="row">
-												<h5 className="card-title col-6 pull-left" onClick={() => this.readNotice(notice)}>
-													<a href="#"> {notice.title} </a>
-												</h5>
+												<Link className="card-title col-6 pull-left" to={'/detalhes/' + notice.id}>
+													<h5 >
+														{notice.title} 
+													</h5>
+												</Link>
 												<h5 className="card-title col-6 text-right pull-right"> {notice.id} </h5>
 											</div>
 											{this.renderFiles(notice.files)}
