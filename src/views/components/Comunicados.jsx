@@ -89,35 +89,25 @@ export class Comunicados extends Component {
 
 	}
 
-	readNotice(id){
-		let read = this.state.read;
-		read.push(id);
-		this.setState(read);
+	readNotice(notice){
+		notice.seen = true;
+		fetch('http://localhost:84/comunicados/'+ notice.id, {
+			method: 'PUT',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(notice)
+		})
 	}
 
-	getRead(id){
+	getSeen(notice){
 		let className = 'card notice shadow';
-		this.state.read.map(
-			r => {
-				if(r === id){
-					console.log(r);
-					className = className + ' read-notice';
-					return className ;
-				}
-			}
-		);
+		if(notice.seen){
+			className = className + ' read-notice';
+		}
 		return className;
 	}
-/*	<div className="row text-center">
-						<div className="card col-10 file notice">
-							<div className="card-body">
-								<a href="#" className="card-text">
-									{file.url}
-								</a>
-								<div className="download icon"></div>
-							</div>
-						</div>
-					</div> */
 
 	render() {
 		return (
@@ -139,12 +129,12 @@ export class Comunicados extends Component {
 						return (
 							<div className="row">
 								<div className="col-sm-12">
-									<div className={this.getRead(notice.id)}>
+									<div className={this.getSeen(notice)}>
 										
 										<div className={this.getNoticeColor(notice.type)}></div>
 										<div className="card-body pb-1 pt-3">
 											<div className="row">
-												<h5 className="card-title col-6 pull-left" onClick={() => this.readNotice(notice.id)}>
+												<h5 className="card-title col-6 pull-left" onClick={() => this.readNotice(notice)}>
 													<a href="#"> {notice.title} </a>
 												</h5>
 												<h5 className="card-title col-6 text-right pull-right"> {notice.id} </h5>
